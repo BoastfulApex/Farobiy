@@ -1,0 +1,74 @@
+from django.shortcuts import render
+from .serializers import *
+from rest_framework import viewsets
+from rest_framework.response import Response
+
+
+class LoginView(KnoxLoginView):
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request, format=None):
+        serializer = AuthTokenSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        login(request, user)
+
+        return super(LoginView, self).post(request, format=None)
+
+
+class CategoryView(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    
+
+class CourseView(viewsets.ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    
+    
+    def list(self, request, *args, **kwargs):
+        category_id = request.GET.get('category_id')
+        if category_id:
+            datas = Course.objects.values().filter(category__id=category_id).first()
+            return Response(datas)            
+        else:
+            datas = Course.objects.all().values()
+            return Response(datas)
+    
+    def retrieve(self, request, *args, **kwargs):
+        course_id = kwargs['pk']
+        course = Course.objects.values().filter(id=course_id).first()
+        if course:
+            descriptions = CourseDescription.objects.values().filter(course__id=course_id).all()
+            print(course)
+            course["descriptions"]=descriptions
+            return Response(course)
+        else:
+            return Response({"detail": "not found"})
+        return super().retrieve(request, *args, **kwargs)
+
+class CourseDescriptionView(viewsets.ModelViewSet):
+    queryset = CourseDescription.objects.all()
+    serializer_class = CourseDescriptionSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    
+
+class SliderView(viewsets.ModelViewSet):
+    queryset = Slider.objects.all()
+    serializer_class = SliderSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    
+
+class TeacherView(viewsets.ModelViewSet):
+    queryset = Teacher.objects.all()
+    serializer_class = TeacherSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    
+
+class FAQView(viewsets.ModelViewSet):
+    queryset = FAQ.objects.all()
+    serializer_class = FAQSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    
