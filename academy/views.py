@@ -22,6 +22,21 @@ class CategoryView(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     
 
+class SubCategoryView(viewsets.ModelViewSet):
+    queryset = SubCategory.objects.all()
+    serializer_class = SubCategorySerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    
+    def list(self, request, *args, **kwargs):
+        category_id = request.GET.get('category_id')
+        if category_id:
+            datas = Course.objects.values().filter(category__id=category_id).first()
+            return Response(datas)            
+        else:
+            datas = Course.objects.all().values()
+            return Response(datas)
+    
+
 class CourseView(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
@@ -29,9 +44,9 @@ class CourseView(viewsets.ModelViewSet):
     
     
     def list(self, request, *args, **kwargs):
-        category_id = request.GET.get('category_id')
+        category_id = request.GET.get('subcategory_id')
         if category_id:
-            datas = Course.objects.values().filter(category__id=category_id).first()
+            datas = Course.objects.values().filter(sub_category__id=category_id).first()
             return Response(datas)            
         else:
             datas = Course.objects.all().values()
