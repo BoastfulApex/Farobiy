@@ -18,7 +18,8 @@ from django.urls import path, include
 from .api import router
 from academy.views import *
 from knox.views import LogoutView, LogoutAllView
-
+from django.conf.urls.static import static
+from .settings import STATIC_URL, STATIC_ROOT, MEDIA_URL, MEDIA_ROOT
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,3 +28,6 @@ urlpatterns = [
     path('auth/logout/', LogoutView.as_view(), name='logout'),
     path('auth/logoutall/', LogoutAllView.as_view(), name='logoutall'),
     ]
+
+urlpatterns += static(STATIC_URL, document_root=STATIC_ROOT)
+urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)
