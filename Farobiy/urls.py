@@ -23,7 +23,7 @@ from knox.views import LogoutView, LogoutAllView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('login/', LoginView.as_view(), name='login'),
-    path('logout/', LogoutView.as_view(), name='logout'),
-    path('logoutall/', LogoutAllView.as_view(), name='logoutall'),
+    path('auth/login/', LoginView.as_view(), name='login'),
+    path('auth/logout/', LogoutView.as_view(), name='logout'),
+    path('auth/logoutall/', LogoutAllView.as_view(), name='logoutall'),
     ]
