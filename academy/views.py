@@ -73,7 +73,29 @@ class CourseDescriptionView(viewsets.ModelViewSet):
 class SliderView(viewsets.ModelViewSet):
     queryset = Slider.objects.all()
     serializer_class = SliderSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    
+    def list(self, request, *args, **kwargs):
+        sliders = self.queryset   
+        data = []
+        for slider in sliders:
+            file = {
+                "id": slider.image.id,
+                "file": slider.image.fileUrl
+            }
+            d = {
+                "id": slider.id,
+                "name_uz": slider.name_uz,
+                "name_en": slider.name_en,
+                "name_ru": slider.name_ru,
+                "description_uz": slider.description_uz,
+                "description_en": slider.description_en,
+                "description_ru": slider.description_ru,
+                "image": file
+            }
+            data.append(d)
+                 
+        return Response(data)
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     
 
 class TeacherView(viewsets.ModelViewSet):

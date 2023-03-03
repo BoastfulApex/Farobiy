@@ -10,13 +10,6 @@ class Slider(models.Model):
     description_en = models.TextField(max_length=200000, null=True, blank=True)
     image = models.ForeignKey('academy.File', on_delete=models.SET_NULL, null=True, blank=True)
 
-    @property
-    def PhotoURL(self):
-        try:
-            return self.image.url
-        except:
-            return ''  
-
 
 class Category(models.Model):
     name_uz = models.CharField(max_length=20000, null=True, blank=True)
@@ -72,12 +65,6 @@ class Course(models.Model):
     def __str__(self):
         return self.name_uz
     
-    @property
-    def PhotoURL(self):
-        if self.image:
-            return self.image.url
-        else:
-            return ''
     
         
 class Teacher(models.Model):
@@ -122,5 +109,13 @@ class FAQ(models.Model):
 class File(models.Model):
     file = models.FileField(null=True, blank=True)
     
+    
+    @property
+    def fileUrl(self):
+        try:
+            return self.file.url
+        except:
+            return ''
+        
     def __str__(self):
-        return self.id
+        return str(self.id)
