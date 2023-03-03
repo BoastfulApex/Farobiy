@@ -78,10 +78,14 @@ class SliderView(viewsets.ModelViewSet):
         sliders = self.queryset   
         data = []
         for slider in sliders:
-            file = {
-                "id": slider.image.id,
-                "file": slider.image.fileUrl
-            }
+            file = []
+            if slider.image:
+                file = {
+                    "id": slider.image.id,
+                    "file": slider.image.fileUrl
+                }
+            else:
+                file = []
             d = {
                 "id": slider.id,
                 "name_uz": slider.name_uz,
