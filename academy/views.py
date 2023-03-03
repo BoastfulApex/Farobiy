@@ -87,3 +87,9 @@ class FAQView(viewsets.ModelViewSet):
     serializer_class = FAQSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     
+
+class FileView(viewsets.ModelViewSet):
+    queryset = File.objects.all()
+    serializer_class = FileSerializer
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    
