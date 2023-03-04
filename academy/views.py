@@ -19,13 +19,13 @@ class LoginView(KnoxLoginView):
 class CategoryView(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     
 
 class SubCategoryView(viewsets.ModelViewSet):
     queryset = SubCategory.objects.all()
     serializer_class = SubCategorySerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     
     def list(self, request, *args, **kwargs):
         category_id = request.GET.get('category_id')
@@ -40,7 +40,7 @@ class SubCategoryView(viewsets.ModelViewSet):
 class CourseView(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     
     
     def list(self, request, *args, **kwargs):
@@ -67,7 +67,7 @@ class CourseView(viewsets.ModelViewSet):
 class CourseDescriptionView(viewsets.ModelViewSet):
     queryset = CourseDescription.objects.all()
     serializer_class = CourseDescriptionSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     
 
 class SliderView(viewsets.ModelViewSet):
@@ -96,26 +96,50 @@ class SliderView(viewsets.ModelViewSet):
                 "description_ru": slider.description_ru,
                 "image": file
             }
+            print(d)
             data.append(d)
                  
         return Response(data)
-    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    
 
 class TeacherView(viewsets.ModelViewSet):
     queryset = Teacher.objects.all()
     serializer_class = TeacherSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     
 
 class FAQView(viewsets.ModelViewSet):
     queryset = FAQ.objects.all()
     serializer_class = FAQSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     
 
 class FileView(viewsets.ModelViewSet):
     queryset = File.objects.all()
     serializer_class = FileSerializer
-    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     
+    def create(self, request, *args, **kwargs):
+        print(self.request.query_params)
+        image_id = self.request.query_params.get('id')
+        print(image_id)
+        if image_id:
+            file = File.objects.get(id=image_id)
+            file.file = request.data['file']
+            data = {
+                'id': file.id,
+                'file': file.fileUrl
+            }
+            file.save()
+            return Response(data)
+        else:        
+            file = File.objects.create(
+                file = request.data['file']
+            )
+            file.save()
+            data  = {
+                "id": file.id,
+                "file": file.fileUrl
+            }
+            return Response(data)
+
+

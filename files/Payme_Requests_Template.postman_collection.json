@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "52afb6a5-f895-4c2c-9470-386a39bb31ef",
+		"name": "Payme Requests Template",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16549975"
+	},
+	"item": [
+		{
+			"name": "card_verify",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 17320810,\r\n    \"method\": \"cards.verify\",\r\n    \"params\": {\r\n        \"token\": \"63c7f9182c70a790fe22252a_fk6JczM9Xx4RFxemY9dwBOVCHWK2ZCWEcKow8qSPgQXstzQs4fNZI1t2Eie23RAaSrmdr5beFz31zsjxjpwWPt30pG4xfxk6evZxA7SZonk4KvBJ40sQAbQGpztcj5BB0tM8rcpUp4WnFWRmvXdQItbzS1f5FN3NKtXMXdmR4AGc7IkJzkHxVKHhsK9v4QHYcHSyZcsobiWEkjTVIemakasOC0u2o1iPY8vyz1P7KftnnwfwFsefoYVzPVA02ZnKvTrNdSpZMFvB8g6rVcYa74ToEZmQOJMUqdgVn56pywsVApg4miaFb6DCYZ7S39XsqnvuAK2g7Gx1Zi623TRcm8cCWg9EmfQ6ntzqBiChk5yjpg12WVbk7Zfg46bF7bRREv2JwJ\",\r\n        \"code\": \"772206\"\r\n    }\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://185.65.202.40:4050/payments/payme/card/verify/",
+					"protocol": "http",
+					"host": [
+						"185",
+						"65",
+						"202",
+						"40"
+					],
+					"port": "4050",
+					"path": [
+						"payments",
+						"payme",
+						"card",
+						"verify",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1720210,\r\n    \"method\": \"receipts.create\",\r\n    \"params\": {\r\n        \"account\": {\r\n            \"user_id\": 17,\r\n            \"phone\": 17\r\n        },\r\n        \"amount\": 10000,\r\n        \"token\":\"63c7f9182c70a790fe22252a_fk6JczM9Xx4RFxemY9dwBOVCHWK2ZCWEcKow8qSPgQXstzQs4fNZI1t2Eie23RAaSrmdr5beFz31zsjxjpwWPt30pG4xfxk6evZxA7SZonk4KvBJ40sQAbQGpztcj5BB0tM8rcpUp4WnFWRmvXdQItbzS1f5FN3NKtXMXdmR4AGc7IkJzkHxVKHhsK9v4QHYcHSyZcsobiWEkjTVIemakasOC0u2o1iPY8vyz1P7KftnnwfwFsefoYVzPVA02ZnKvTrNdSpZMFvB8g6rVcYa74ToEZmQOJMUqdgVn56pywsVApg4miaFb6DCYZ7S39XsqnvuAK2g7Gx1Zi623TRcm8cCWg9EmfQ6ntzqBiChk5yjpg12WVbk7Zfg46bF7bRREv2JwJ\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://185.65.202.40:4050/payments/payme/payment/",
+					"protocol": "http",
+					"host": [
+						"185",
+						"65",
+						"202",
+						"40"
+					],
+					"port": "4050",
+					"path": [
+						"payments",
+						"payme",
+						"payment",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "card_create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 35,\r\n    \"method\": \"cards.create\",\r\n    \"params\": {\r\n        \"card\": { \r\n        \"number\": \"8600312928065230\",\r\n        \"expire\": \"0225\"\r\n    },\r\n    \"save\": \"true\"}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://185.65.202.40:4050/payments/payme/card/create/",
+					"protocol": "https",
+					"host": [
+						"185",
+						"65",
+						"202",
+						"40"
+					],
+					"port": "4050",
+					"path": [
+						"payments",
+						"payme",
+						"card",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "20a1d025-2ef8-40c9-a537-b676987e57e0",
+		"name": "Monand Payme",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16549975"
+	},
+	"item": [
+		{
+			"name": "card_create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 35,\r\n    \"method\": \"cards.create\",\r\n    \"params\": {\r\n        \"card\": { \r\n        \"number\": \"8600312928065230\",\r\n        \"expire\": \"0225\"\r\n    },\r\n    \"save\": \"true\"}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://monand.abba.uz/payments/payme/card/create/",
+					"protocol": "https",
+					"host": [
+						"monand",
+						"abba",
+						"uz"
+					],
+					"path": [
+						"payments",
+						"payme",
+						"card",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "card_verify",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 17320810,\r\n    \"method\": \"cards.verify\",\r\n    \"params\": {\r\n        \"token\": \"636cf6025ff79ff377e4a0d3_4N9DZDcv7fVdbR65SdtrKnwGsgO2q6aMjPX6zWhWGEQPOipWQRJTpGahJuvWt8iIrk12f50Y2fGY2u2iaAiAwPapyxUUPDQwc9Jb20gW6yctA9H7z6ASCuhdy5jUgdV2vDCtDfKh4n1EeuyOEHoXzh4pTEDRaIOo8Zue8UKX0t6k7efCstuczoiHKQ8p3o7mVyaDHO7enQFYjdqcMmM6ECkRqrqonD8ZNvwZ2hz5dvk7QPAjbamFjHUCtd7eupJz5wRV7MH8FQijOnRXaeewERBbGixD2m9z1z66TGG8IHfsj8rsuXdmjcMd0n9G0kv0DjzmUIJbT4F9A1OjcSgAmirs398q3a1kShhjooXIrCR6gdskJHsFqtSSu1xUE3BOZuBiWj\",\r\n        \"code\": \"376575\"\r\n    }\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://monand.abba.uz/payments/payme/card/verify/",
+					"protocol": "https",
+					"host": [
+						"monand",
+						"abba",
+						"uz"
+					],
+					"path": [
+						"payments",
+						"payme",
+						"card",
+						"verify",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1720210,\r\n    \"method\": \"receipts.create\",\r\n    \"params\": {\r\n        \"account\": {\r\n            \"order_id\": 9262083\r\n        },\r\n        \"amount\": 10000,\r\n        \"token\":\"637ce27c45c24bfc85bf56ae_cQ1V1dQvH3kkbu3p1bvnJ4bs35v5Cg2Xe9tVFgG2SbUXgJVQ9n7v3j1926Wje5Nf8zt8SOQw70WaUfgUBTyUDoHEoQRwAOFADO7AsxOy84D1WPJbdAXWPiRcifnvDNayGMzV9hjyoWsDJFMG8YJDatVnVPSTVPdSyOme8kZ6nUzpRYtFDxFYbdIUZ2JuyFVUZdYDRVCywwnIpJ4VFSj75XXot90jb0nSYq46Wr1aAM0shUS76UTi0DRpy9v6u8dIVNOdaQoaWmz5puYY8oaE1GrSHdsBRXPTm7b7cOPH28rZr7RQXRVDxJjVybaberM6Qg3Rc4Zt8RKH3uGr23vCMHIkdAwe73Cic5UHtd9n8QzeYarmYoeObsEj9mmBrUfq6r84Ea\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://monand.abba.uz/payments/payme/payment/",
+					"protocol": "https",
+					"host": [
+						"monand",
+						"abba",
+						"uz"
+					],
+					"path": [
+						"payments",
+						"payme",
+						"payment",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
